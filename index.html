@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ti con mucho cariño 💜</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Satisfy&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --morado-oscuro: #2d0047;
+      --morado-medio: #4a0072;
+      --morado-vivo: #7b1fa2;
+      --lila: #ce93d8;
+      --rosa-suave: #f3e5f5;
+      --rosa-claro: #fce4ec;
+      --blanco: #fff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--morado-oscuro);
+      color: var(--blanco);
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── PÉTALOS FLOTANTES ── */
+    .petals {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      top: -40px;
+      font-size: 1.4rem;
+      animation: caer linear infinite;
+      opacity: 0.5;
+    }
+    @keyframes caer {
+      0%   { transform: translateY(-40px) rotate(0deg); opacity: 0.6; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 40px;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(123,31,162,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(74,0,114,0.5) 0%, transparent 55%),
+        linear-gradient(160deg, #2d0047 0%, #1a0030 100%);
+      z-index: 1;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ce93d8' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(206,147,216,0.15);
+      border: 1px solid rgba(206,147,216,0.4);
+      border-radius: 50px;
+      padding: 6px 20px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lila);
+      margin-bottom: 24px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Satisfy', cursive;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.1;
+      color: var(--blanco);
+      text-shadow: 0 0 60px rgba(206,147,216,0.4);
+      animation: fadeUp 1s ease 0.2s both;
+      margin-bottom: 16px;
+    }
+
+    .hero .subtitulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--lila);
+      letter-spacing: 0.08em;
+      animation: fadeUp 1s ease 0.4s both;
+      margin-bottom: 40px;
+    }
+
+    /* ── AVISO ANIMADO ── */
+    .aviso {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(74,0,114,0.8), rgba(123,31,162,0.8));
+      border: 1.5px solid var(--lila);
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      color: var(--rosa-suave);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      animation: fadeUp 1s ease 0.5s both, pulso 2s ease-in-out 1.5s infinite;
+      cursor: default;
+    }
+    .flecha-abajo { animation: rebotar 1s ease-in-out infinite; display: inline-block; }
+    @keyframes rebotar {
+      0%, 100% { transform: translateY(-3px); }
+      50%       { transform: translateY(3px); }
+    }
+    @keyframes pulso {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(206,147,216,0.3); }
+      50%       { box-shadow: 0 0 0 10px rgba(206,147,216,0); }
+    }
+
+    /* ── PLAYER ── */
+    .player-wrap {
+      animation: fadeUp 1s ease 0.7s both;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .play-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(74,0,114,0.6);
+      border: 1.5px solid var(--lila);
+      border-radius: 60px;
+      padding: 12px 24px 12px 12px;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    .play-btn:hover { background: rgba(106,27,154,0.7); transform: scale(1.02); }
+    .play-icon {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--lila);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .play-icon svg { fill: var(--morado-oscuro); width: 20px; height: 20px; margin-left: 2px; }
+    .play-icon svg:last-child { margin-left: 0; }
+    .play-info { flex: 1; text-align: left; }
+    .play-title { display: block; color: var(--blanco); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.03em; }
+    .play-artist { display: block; color: var(--lila); font-size: 0.8rem; margin-top: 2px; }
+    .play-waves { display: flex; align-items: center; gap: 3px; height: 24px; opacity: 0; transition: opacity 0.3s; }
+    .play-waves.active { opacity: 1; }
+    .play-waves span {
+      display: block; width: 3px; background: var(--lila); border-radius: 3px;
+      animation: onda 0.8s ease-in-out infinite;
+    }
+    .play-waves span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+    .play-waves span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+    .play-waves span:nth-child(3) { height: 22px; animation-delay: 0.2s; }
+    .play-waves span:nth-child(4) { height: 14px; animation-delay: 0.3s; }
+    .play-waves span:nth-child(5) { height: 8px;  animation-delay: 0.4s; }
+    @keyframes onda {
+      0%, 100% { transform: scaleY(0.5); }
+      50%       { transform: scaleY(1); }
+    }
+
+    /* ── SEPARADOR ── */
+    .sep {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 60px 24px 0;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .sep-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--lila), transparent); }
+    .sep-icon { font-size: 1.4rem; }
+
+    /* ── CARD MENSAJE ── */
+    .mensaje-section {
+      position: relative;
+      z-index: 1;
+      padding: 40px 24px 80px;
+    }
+
+    .card {
+      max-width: 860px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, #fce4ec, #f3e5f5);
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    /* Flor SVG decorativa */
+    .card-flor {
+      background: #e8d5f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: 400px;
+    }
+
+    .flor-svg {
+      width: 100%;
+      max-width: 260px;
+      opacity: 0.85;
+    }
+
+    .card-texto {
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .card-titulo-small {
+      font-family: 'Satisfy', cursive;
+      font-size: 1.3rem;
+      color: var(--morado-vivo);
+      margin-bottom: 4px;
+    }
+
+    .card-titulo-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--morado-oscuro);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .card-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: #4a0072;
+      line-height: 1.8;
+    }
+
+    .card-firma {
+      font-family: 'Satisfy', cursive;
+      font-size: 1.2rem;
+      color: var(--morado-vivo);
+      margin-top: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: rgba(0,0,0,0.3);
+      border-top: 1px solid rgba(206,147,216,0.2);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(206,147,216,0.7);
+      letter-spacing: 0.06em;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* ── ANIMACIONES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .card { grid-template-columns: 1fr; }
+      .card-flor { min-height: 220px; padding: 30px; }
+      .card-texto { padding: 32px 24px; }
+      .card-titulo-big { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pétalos flotantes -->
+  <div class="petals" id="petals"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="badge">✨ Un mensaje especial para ti ✨</div>
+      <h1>Para ti con mucho cariño</h1>
+      <p class="subtitulo">— 8 de Marzo · Día Internacional de la Mujer —</p>
+
+      <div class="aviso">
+        🎵 ¡Púlsame antes de seguir leyendo! <span class="flecha-abajo">👇</span>
+      </div>
+
+      <div class="player-wrap">
+        <button class="play-btn" onclick="togglePlay()">
+          <div class="play-icon">
+            <svg id="iconPlay" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+          </div>
+          <div class="play-info">
+            <span class="play-title">Someone Like You</span>
+            <span class="play-artist">Adele</span>
+          </div>
+          <div class="play-waves" id="waves">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </button>
+      </div>
+
+      <audio id="miCancion" src="Adele Someone Like Official Music Video.mp3"></audio>
+    </div>
+  </section>
+
+  <!-- SEPARADOR -->
+  <div class="sep">
+    <div class="sep-line"></div>
+    <span class="sep-icon">💜</span>
+    <div class="sep-line"></div>
+  </div>
+
+  <!-- MENSAJE -->
+  <section class="mensaje-section">
+    <div class="card">
+      <!-- Flor decorativa SVG -->
+      <div class="card-flor">
+        <svg class="flor-svg" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tallo -->
+          <rect x="140" y="220" width="20" height="160" rx="10" fill="#c49ed6"/>
+          <!-- Hoja izquierda -->
+          <ellipse cx="110" cy="300" rx="45" ry="22" transform="rotate(-30 110 300)" fill="#d4aadf"/>
+          <!-- Hoja derecha -->
+          <ellipse cx="190" cy="330" rx="45" ry="22" transform="rotate(30 190 330)" fill="#d4aadf"/>
+          <!-- Pétalos -->
+          <ellipse cx="150" cy="120" rx="38" ry="80" fill="#c49ed6" opacity="0.9"/>
+          <ellipse cx="150" cy="120" rx="38" ry="80" transform="rotate(45 150 180)" fill="#c49ed6" opacity="0.9"/>
+          <ellipse cx="150" cy="120" rx="38" ry="80" transform="rotate(90 150 180)" fill="#c49ed6" opacity="0.9"/>
+          <ellipse cx="150" cy="120" rx="38" ry="80" transform="rotate(135 150 180)" fill="#c49ed6" opacity="0.9"/>
+          <!-- Centro -->
+          <circle cx="150" cy="180" r="38" fill="#e8d5f0"/>
+          <circle cx="150" cy="180" r="26" fill="#c49ed6"/>
+          <circle cx="150" cy="180" r="14" fill="#e8d5f0"/>
+        </svg>
+      </div>
+
+      <!-- Texto -->
+      <div class="card-texto">
+        <p class="card-titulo-small">Querida mujer maravillosa</p>
+        <h2 class="card-titulo-big">¡FELIZ DÍA!</h2>
+        <p class="card-body">
+          Hoy quiero recordarte lo valiosa y fuerte que eres.<br><br>
+          Tu forma de luchar, de levantarte y de seguir adelante inspira más de lo que imaginas.<br><br>
+          Eres una mujer llena de luz, de sueños y de una fortaleza que deja huella en quienes te rodean. Nunca olvides lo especial que eres ni todo lo bueno que aportas al mundo.<br><br>
+          En este día celebro tu esencia, tu valentía y el hermoso corazón que tienes.<br><br>
+          Feliz Día de la Mujer.
+        </p>
+        <p class="card-firma">Con cariño,<br>Tu amiga ESTEFANIA 💜</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Les desea su restaurante de preferencia</span>
+    <span>📞 Contactos: 3007536544</span>
+  </footer>
+
+  <script>
+    // Reproductor
+    var audio = document.getElementById('miCancion');
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        document.getElementById('iconPlay').style.display = 'none';
+        document.getElementById('iconPause').style.display = 'block';
+        document.getElementById('waves').classList.add('active');
+      } else {
+        audio.pause();
+        document.getElementById('iconPlay').style.display = 'block';
+        document.getElementById('iconPause').style.display = 'none';
+        document.getElementById('waves').classList.remove('active');
+      }
+    }
+
+    // Pétalos flotantes
+    const emojis = ['🌸', '💜', '🌷', '✨', '💫'];
+    const container = document.getElementById('petals');
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (6 + Math.random() * 8) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+      container.appendChild(p);
+    }
+  </script>
+
+</body>
+</html>
